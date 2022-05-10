@@ -56,6 +56,7 @@ export default function App() {
     }
     if(searchField !== '') {
       const filtered = deriveFilteredData(filteredBy);
+      
       setFilteredMonsters(filtered);
     } else {
       setFilteredMonsters(monsters);
