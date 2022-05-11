@@ -1,6 +1,6 @@
 
 const SearchBar = ({ handleUpdate }) => (
-  <div className='my-5  text-start'>
+  <div className='col text-start'>
     <label for='search' className=' form-label fs-4'>Search</label>
     <input 
       id='search'
