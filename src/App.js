@@ -6,6 +6,23 @@ import SortBy from "./components/sortby";
 import "./styles.css";
 var jp = require("jsonpath");
 
+export const deriveJPath = f => {
+  switch (f) {
+    case 'name':
+      return '$.name';
+    case 'email':
+      return '$.email';
+    case 'company':
+      return '$.company.name';
+    case 'phone':
+      return '$.phone';
+    case 'city':
+      return '$.address.city';
+    default:
+      return '$.name';
+  }
+}
+
 export default function App() {
   const [monsters, setMonsters] = useState([]);
   const [searchField, setSearchField] = useState('');
@@ -34,22 +51,7 @@ export default function App() {
     setSortBy(v);
   }
   
-  const deriveJPath = f => {
-    switch (f) {
-      case 'name':
-        return '$.name';
-      case 'email':
-        return '$.email';
-      case 'company':
-        return '$.company.name';
-      case 'phone':
-        return '$.phone';
-      case 'city':
-        return '$.address.city';
-      default:
-        return '$.name';
-    }
-  }
+  
 
   useEffect(() => {
     if(searchField !== '') {
@@ -86,7 +88,11 @@ export default function App() {
         <SortBy sortValue={sortBy} handleUpdate={updateSort} />
       </div>
       {
-        <MonstersList monsters={Object.keys(sortedMonsters).map(m => sortedMonsters[m])}/>
+        <MonstersList
+          filteredBy={filteredBy} 
+          searchField={searchField} 
+          monsters={Object.keys(sortedMonsters).map(m => sortedMonsters[m])}
+        />
       }
     </div>
   );
