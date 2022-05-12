@@ -81,7 +81,7 @@ export default function App() {
   }, [sortBy, filteredMonsters]);
 
   return (
-    <div className="App container-xl">
+    <div className="App container-xl" >
       <div className='row row-cols-2 mt-4'> 
         <SearchBar handleUpdate={updateSearch} />
         <FilterBy filterValue={filteredBy} handleUpdate={updateFilter} />

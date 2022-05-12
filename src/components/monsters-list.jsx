@@ -12,7 +12,7 @@ const MonstersList = ({ monsters, filteredBy, searchField }) =>
       { monsters.map(m => 
         <div key={m.id} className='col'>
           <div className='card'>
-            <div className='fs-5 card-header text-start bg-secondary'>
+            <div className='fs-5 card-header text-start bg-muted'>
               {filteredBy === 'name' ? <HighlightedText text={m.name} toHighlight={searchField}/> : m.name}
             </div>
             <div className='card-body lead'>
@@ -20,7 +20,6 @@ const MonstersList = ({ monsters, filteredBy, searchField }) =>
                 rows.map(
                   (row, index) => 
                   {
-                    console.log(jp.query(m, paths[index]));
                     return <InfoRow 
                     searchField={searchField} 
                     filteredBy={filteredBy} 

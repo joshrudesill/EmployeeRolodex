@@ -7,7 +7,7 @@ const HighlightedText = ({ text, toHighlight }) => {
     {
       text.split('').map((letter, index) => {
         if (index >= indexOfLetters && index <= indexOfLetters + toHighlight.length - 1) {
-          return <span className='text-warning'>{letter}</span>
+          return <span className='bg-warning'>{letter}</span>
         } else {
           return letter;
         }
