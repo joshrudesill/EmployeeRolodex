@@ -23,6 +23,8 @@ export const deriveJPath = f => {
   }
 }
 
+
+
 export default function App() {
   const [monsters, setMonsters] = useState([]);
   const [searchField, setSearchField] = useState('');
@@ -31,6 +33,7 @@ export default function App() {
   const [filteredMonsters, setFilteredMonsters] = useState([]);
   const [sortedMonsters, setSortedMonsters] = useState([]);
   
+
   const fetchData = async () => {
     const result = await fetch('https://jsonplaceholder.typicode.com/users');
     const data = await result.json();
@@ -50,8 +53,6 @@ export default function App() {
   const updateSort = v => {
     setSortBy(v);
   }
-  
-  
 
   useEffect(() => {
     if(searchField !== '') {
@@ -82,7 +83,7 @@ export default function App() {
 
   return (
     <div className="App container-xl" >
-      <div className='row row-cols-2 mt-4'> 
+      <div className='row row-cols-2 mt-4 p-3 border rounded'> 
         <SearchBar handleUpdate={updateSearch} />
         <FilterBy filterValue={filteredBy} handleUpdate={updateFilter} />
         <SortBy sortValue={sortBy} handleUpdate={updateSort} />
