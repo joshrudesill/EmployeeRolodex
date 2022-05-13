@@ -21,10 +21,12 @@ const MonstersList = ({ monsters, filteredBy, searchField }) =>
                   (row, index) => 
                   {
                     return <InfoRow 
-                    searchField={searchField} 
-                    filteredBy={filteredBy} 
-                    text={row}
-                    content={jp.query(m, paths[index])[0]}/>}
+                              key={row}
+                              searchField={searchField} 
+                              filteredBy={filteredBy} 
+                              text={row}
+                              content={jp.query(m, paths[index])[0]}/>
+                  }
                 )
               }
             </div>

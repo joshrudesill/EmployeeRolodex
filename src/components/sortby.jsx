@@ -1,7 +1,7 @@
 
 const SortBy = ({ sortValue, handleUpdate }) => (
   <div className='text-start col my-2'>
-    <label for="filterby" className="form-label fs-4">Sort By</label>
+    <label htmlFor="filterby" className="form-label fs-4">Sort By</label>
     <select value={sortValue} onChange={e => handleUpdate(e.target.value)} id='filterby' className="form-select">
       <option value='name'>Name</option>
       <option value="email">Email</option>
