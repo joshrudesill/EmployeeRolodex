@@ -6,22 +6,18 @@ import SortBy from "./components/sortby";
 import "./styles.css";
 var jp = require("jsonpath");
 
-export const deriveJPath = f => {
-  switch (f) {
-    case 'name':
-      return '$.name';
-    case 'email':
-      return '$.email';
-    case 'company':
-      return '$.company.name';
-    case 'phone':
-      return '$.phone';
-    case 'city':
-      return '$.address.city';
-    default:
-      return '$.name';
-  }
-}
+
+export const jpath = {
+  'name' : '$.name', 
+  'email' : '$.email', 
+  'company' : '$.company.name', 
+  'phone' : '$.phone', 
+  'city' : '$.address.city',
+  'username' : '$.username',
+  'website' : '$.website',
+  'zipcode' : '$.address.zipcode'
+};
+
 
 
 
@@ -56,9 +52,8 @@ export default function App() {
 
   useEffect(() => {
     if(searchField !== '') {
-      const jpath = deriveJPath(filteredBy);
       const filtered = monsters.filter(monster => {
-        const path = jp.query(monster, jpath);
+        const path = jp.query(monster, jpath[filteredBy]);
         return path[0].toLowerCase().includes(searchField.toLowerCase());
         }
       );
@@ -76,8 +71,7 @@ export default function App() {
           return ((x < y) ? -1 : ((x > y) ? 1 : 0));
         });
       }
-    const sPath = deriveJPath(sortBy);
-    const sorted = sortByKey(filteredMonsters, sPath);
+    const sorted = sortByKey(filteredMonsters, jpath[sortBy]);
     setSortedMonsters([...sorted]);
   }, [sortBy, filteredMonsters]);
 

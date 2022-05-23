@@ -1,38 +1,19 @@
-import HighlightedText from "./highlighted-text";
-import InfoRow from "./info-row";
-import { deriveJPath } from '../App';
-var jp = require("jsonpath");
-
+import MonsterCard from "./monster-card";
+import MonsterModal from './monster-modal';
 const MonstersList = ({ monsters, filteredBy, searchField }) => 
 {
-  const rows = ['email', 'company', 'phone', 'city'];
-  const paths = rows.map(row => deriveJPath(row));
   return (
-    <div className='mt-5 row row-cols-3 g-2'>
-      { monsters.map(m => 
-        <div key={m.id} className='col g-2'>
-          <div className='card shadow shadow-md' style={{border: 'none'}}>
-            <div className='fs-4 card-header text-start' style={{background: 'linear-gradient(90deg, rgb(28,181,224, 0.3) 0%, rgb(0,8,81, 0.5) 100%)'}}>
-              {filteredBy === 'name' ? <HighlightedText text={m.name} toHighlight={searchField}/> : m.name}
-            </div>
-            <div className='card-body lead'>
-              {
-                rows.map(
-                  (row, index) => 
-                  {
-                    return <InfoRow 
-                              key={row}
-                              searchField={searchField} 
-                              filteredBy={filteredBy} 
-                              text={row}
-                              content={jp.query(m, paths[index])[0]}/>
-                  }
-                )
-              }
-            </div>
+    <div className='mt-5 row row-cols-xl-3 row-cols-md-2 row-cols-1 g-2'>
+      { monsters.map(monster => {
+        return (
+          <div>
+            <MonsterCard key={monster.id} monster={monster} filteredBy={filteredBy} searchField={searchField} {...monster} />
+            <MonsterModal key={'m' + monster.id} monster={monster} {...monster}/>
           </div>
-        </div>
-      )}
+        )
+      })}
+        
+        
     </div>
   )
 }
